@@ -1,5 +1,5 @@
 import express from 'express';
-import * as vendorController from '../controllers/vendorController.js';
+import * as vendorController from '../controller/vendorController.js';
 import authMiddleware from '../middleware/authMiddleware.js';
 import roleMiddleware from '../middleware/roleMiddleware.js';
 import upload from '../middleware/uploadMiddleware.js';
