@@ -1,121 +1,78 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
+import PrivateRoute from './context/PrivateRoute';
+
+// Public Pages
+import IndexPage from './pages/IndexPage';
+import AdminLogin from './pages/AdminLogin';
+import VendorLogin from './pages/VendorLogin';
+import VendorSignup from './pages/VendorSignup';
+import UserLogin from './pages/UserLogin';
+import UserSignup from './pages/UserSignup';
+
+// Admin Pages
+import AdminDashboard from './pages/admin/AdminDashboard';
+import MaintainUser from './pages/admin/MaintainUser';
+import MaintainVendor from './pages/admin/MaintainVendor';
+
+// Vendor Pages
+import VendorDashboard from './pages/vendor/VendorDashboard';
+import VendorItems from './pages/vendor/VendorItems';
+import VendorProductStatus from './pages/vendor/VendorProductStatus';
+import VendorUpdateOrder from './pages/vendor/VendorUpdateOrder';
+import VendorRequests from './pages/vendor/VendorRequests';
+
+// User Pages
+import UserPortal from './pages/user/UserPortal';
+import VendorListing from './pages/user/VendorListing';
+import UserProducts from './pages/user/UserProducts';
+import UserCart from './pages/user/UserCart';
+import UserCheckout from './pages/user/UserCheckout';
+import OrderSuccess from './pages/user/OrderSuccess';
+import RequestItem from './pages/user/RequestItem';
+import OrderStatus from './pages/user/OrderStatus';
+import GuestList from './pages/user/GuestList';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <Router>
+      <AuthProvider>
+        <Routes>
+          {/* Public Routes */}
+          <Route path="/" element={<IndexPage />} />
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/vendor/login" element={<VendorLogin />} />
+          <Route path="/vendor/signup" element={<VendorSignup />} />
+          <Route path="/user/login" element={<UserLogin />} />
+          <Route path="/user/signup" element={<UserSignup />} />
 
-      <div className="ticks"></div>
+          {/* Admin Routes */}
+          <Route path="/admin" element={<PrivateRoute allowedRole="admin"><AdminDashboard /></PrivateRoute>} />
+          <Route path="/admin/maintain-user" element={<PrivateRoute allowedRole="admin"><MaintainUser /></PrivateRoute>} />
+          <Route path="/admin/maintain-vendor" element={<PrivateRoute allowedRole="admin"><MaintainVendor /></PrivateRoute>} />
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+          {/* Vendor Routes */}
+          <Route path="/vendor" element={<PrivateRoute allowedRole="vendor"><VendorDashboard /></PrivateRoute>} />
+          <Route path="/vendor/items" element={<PrivateRoute allowedRole="vendor"><VendorItems /></PrivateRoute>} />
+          <Route path="/vendor/product-status" element={<PrivateRoute allowedRole="vendor"><VendorProductStatus /></PrivateRoute>} />
+          <Route path="/vendor/update/:orderId" element={<PrivateRoute allowedRole="vendor"><VendorUpdateOrder /></PrivateRoute>} />
+          <Route path="/vendor/requests" element={<PrivateRoute allowedRole="vendor"><VendorRequests /></PrivateRoute>} />
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+          {/* User Routes */}
+          <Route path="/user" element={<PrivateRoute allowedRole="user"><UserPortal /></PrivateRoute>} />
+          <Route path="/user/vendors" element={<PrivateRoute allowedRole="user"><VendorListing /></PrivateRoute>} />
+          <Route path="/user/vendors/:vendorId/products" element={<PrivateRoute allowedRole="user"><UserProducts /></PrivateRoute>} />
+          <Route path="/user/cart" element={<PrivateRoute allowedRole="user"><UserCart /></PrivateRoute>} />
+          <Route path="/user/checkout" element={<PrivateRoute allowedRole="user"><UserCheckout /></PrivateRoute>} />
+          <Route path="/user/success" element={<PrivateRoute allowedRole="user"><OrderSuccess /></PrivateRoute>} />
+          <Route path="/user/request-item" element={<PrivateRoute allowedRole="user"><RequestItem /></PrivateRoute>} />
+          <Route path="/user/order-status" element={<PrivateRoute allowedRole="user"><OrderStatus /></PrivateRoute>} />
+          <Route path="/user/guest-list" element={<PrivateRoute allowedRole="user"><GuestList /></PrivateRoute>} />
+        </Routes>
+      </AuthProvider>
+    </Router>
+  );
 }
 
-export default App
+export default App;
