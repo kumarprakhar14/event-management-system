@@ -20,6 +20,13 @@ app.use(express.json());
 // Serve static uploads folder (if still needed locally for backwards compatibility)
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
+app.get('/health', (req, res) => {
+    return res.status(200).json({
+        success: "true",
+        message:"API is healthy"
+    })
+})
+
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);
