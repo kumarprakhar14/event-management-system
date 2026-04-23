@@ -51,6 +51,12 @@ A full-stack **Event Management System** built with the MERN stack. The system p
 - Manage Vendors (Create, View, Update, Delete, Toggle Active Status)
 - Manage memberships for both Users and Vendors
 
+#### Seeded admin credentials
+```
+User ID: admin@event.com
+Password: admin123
+```
+
 ### Vendor Portal
 - Manage product catalog (Add, Edit, Delete items with image upload)
 - View and update incoming orders by status
