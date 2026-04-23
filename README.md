@@ -5,7 +5,6 @@
 **Created by Kumar Prakhar**
 
 [![Live Demo](https://img.shields.io/badge/🚀%20Live%20Demo-Visit%20Now-4472c4?style=for-the-badge)](https://event-management-system-kappa-pearl.vercel.app/)
-(Frontend)
 
 ![React](https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB)
 ![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white)
